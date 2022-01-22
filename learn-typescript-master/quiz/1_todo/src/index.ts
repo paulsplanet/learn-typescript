@@ -1,7 +1,23 @@
-let todoItems: object[];    // todoItems is Array which contains objects inside
+// type Todo = {
+//   id: number;
+//   title: string;
+//   done: boolean;
+// }
+// they use "Todo" when TS needs it
+
+//  interface:  { id: number; title: string; done: boolean } => Todo
+interface Todo {
+  id: number;
+  title: string;
+  done: boolean;
+}
+
+//let todoItems: object[];    // todoItems is Array which contains objects inside
+//let todoItems: { id: number; title: string; done: boolean }[];
+let todoItems: Todo[];
 
 // api
-function fetchTodoItems(): object[] {
+function fetchTodoItems(): Todo[] {   // fetchTodoItems(): object[] => fetchTodoItems: details...
   const todos = [
     { id: 1, title: '안녕', done: false },
     { id: 2, title: '타입', done: false },
@@ -11,12 +27,12 @@ function fetchTodoItems(): object[] {
 }
 
 // crud methods
-function fetchTodos(): object[] {
+function fetchTodos(): object[] {       
   const todos = fetchTodoItems();
   return todos;
 }
 
-function addTodo(todo: object): void {      // return void means there is no retur
+function addTodo(todo: Todo): void {      // return void means there is no retur // todo: object => todo: details...
   todoItems.push(todo);
 }
 
@@ -24,7 +40,10 @@ function deleteTodo(index: number): void {
   todoItems.splice(index, 1);
 }
 
-function completeTodo(index: number, todo: object): void {
+function completeTodo(
+  index: number, 
+  todo: Todo
+  ): void {
   todo.done = true;
   todoItems.splice(index, 1, todo);
 }
