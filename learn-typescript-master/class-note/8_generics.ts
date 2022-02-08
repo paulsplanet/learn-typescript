@@ -43,3 +43,11 @@ a.split('');            => error ( a is Union of string and number, split is str
 */
 
 
+// declare generic in interface
+interface Drop<T> {
+    value: T;
+    selected: boolean;
+}
+
+const obj: Drop<number> = { value: 20, selected: false }
+const objTwo: Drop<string> = { value: 'abc', selected: false }
