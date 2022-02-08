@@ -51,3 +51,47 @@ interface Drop<T> {
 
 const obj: Drop<number> = { value: 20, selected: false }
 const objTwo: Drop<string> = { value: 'abc', selected: false }
+
+
+//  limit the type in generic
+function logTextLength<T>(text: T[]): T[] {     // let function know that T is array. so function is ready to use array method like length and forEach.
+    console.log(text.length);
+    text.forEach(function (text) {
+        console.log(text)
+    })
+    return text;
+}
+
+logTextLength<string>(['hi', 'abc']);
+
+
+//  limit the type in generic 2 - use defined type
+interface LengthType {
+    length: number;
+
+}
+
+function textLength<T extends LengthType>(text: T): T {
+    text.length;            // if there is no defined type for receiving, length is error. because function didn't know what type of parameter received
+    return text;
+}
+
+textLength('abc');              // string has length method
+textLength({ length: 20 });
+
+
+//  limit the type in generic 3 - use keyof
+interface ShoppingItem {
+    name: string;
+    price: number;
+    stock: number;
+}
+
+/* keyof = T will be one of ShoppingItem's key(name, price, stock) */
+function getShoppingItemOption<T extends keyof ShoppingItem>(itemOption: T): T {
+    return itemOption;
+
+}
+
+// ctrl + space = auto fill (to fill out name | price | stock automatically)
+getShoppingItemOption("name")
