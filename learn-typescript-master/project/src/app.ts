@@ -1,9 +1,10 @@
 
 // utils
-function $(selector) {
+// function for DOM by selecting CSS class
+function $(selector: string) {
   return document.querySelector(selector);
 }
-function getUnixTimestamp(date) {
+function getUnixTimestamp(date: Date) {
   return new Date(date).getTime();
 }
 
@@ -18,7 +19,7 @@ const recoveredList = $('.recovered-list');
 const deathSpinner = createSpinnerElement('deaths-spinner');
 const recoveredSpinner = createSpinnerElement('recovered-spinner');
 
-function createSpinnerElement(id) {
+function createSpinnerElement(id: string) {
   const wrapperDiv = document.createElement('div');
   wrapperDiv.setAttribute('id', id);
   wrapperDiv.setAttribute(
@@ -45,8 +46,14 @@ function fetchCovidSummary() {
   return axios.get(url);
 }
 
-function fetchCountryInfo(countryCode, status) {
-  // params: confirmed, recovered, deaths
+enum CovidStatus {
+  Confirmed = 'confirmed',
+  Recovered = 'recovered',
+  Deaths = 'deaths'
+}
+
+function fetchCountryInfo(countryCode: string, status: CovidStatus) {
+  // status params: confirmed, recovered, deaths
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
   return axios.get(url);
 }
@@ -98,11 +105,11 @@ async function handleListClick(event) {
   isDeathLoading = false;
 }
 
-function setDeathsList(data) {
+function setDeathsList(data: any) {
   const sorted = data.sort(
-    (a, b) => getUnixTimestamp(b.Date) - getUnixTimestamp(a.Date),
+    (a: any, b: any) => getUnixTimestamp(b.Date) - getUnixTimestamp(a.Date),
   );
-  sorted.forEach(value => {
+  sorted.forEach( (value: any) => {
     const li = document.createElement('li');
     li.setAttribute('class', 'list-item-b flex align-center');
     const span = document.createElement('span');
@@ -120,15 +127,15 @@ function clearDeathList() {
   deathsList.innerHTML = null;
 }
 
-function setTotalDeathsByCountry(data) {
+function setTotalDeathsByCountry(data: any) {
   deathsTotal.innerText = data[0].Cases;
 }
 
-function setRecoveredList(data) {
+function setRecoveredList(data:any) {
   const sorted = data.sort(
-    (a, b) => getUnixTimestamp(b.Date) - getUnixTimestamp(a.Date),
+    (a: any, b: any) => getUnixTimestamp(b.Date) - getUnixTimestamp(a.Date),
   );
-  sorted.forEach(value => {
+  sorted.forEach( (value: any) => {
     const li = document.createElement('li');
     li.setAttribute('class', 'list-item-b flex align-center');
     const span = document.createElement('span');
@@ -146,7 +153,7 @@ function clearRecoveredList() {
   recoveredList.innerHTML = null;
 }
 
-function setTotalRecoveredByCountry(data) {
+function setTotalRecoveredByCountry(data: any) {
   recoveredTotal.innerText = data[0].Cases;
 }
 
