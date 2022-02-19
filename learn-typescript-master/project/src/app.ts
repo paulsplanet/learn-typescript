@@ -1,4 +1,3 @@
-
 // utils
 // function for DOM by selecting CSS class
 function $(selector: string) {
@@ -9,10 +8,11 @@ function getUnixTimestamp(date: Date) {
 }
 
 // DOM
-const confirmedTotal = $('.confirmed-total');
-const deathsTotal = $('.deaths');
-const recoveredTotal = $('.recovered');
-const lastUpdatedTime = $('.last-updated-time');
+let a : Element | HTMLElement | HTMLParagraphElement;
+const confirmedTotal = $('.confirmed-total') as HTMLSpanElement;
+const deathsTotal = $('.deaths') as HTMLParagraphElement;
+const recoveredTotal = $('.recovered') as HTMLParagraphElement;
+const lastUpdatedTime = $('.last-updated-time') as HTMLParagraphElement;
 const rankList = $('.rank-list');
 const deathsList = $('.deaths-list');
 const recoveredList = $('.recovered-list');
@@ -87,14 +87,14 @@ async function handleListClick(event) {
   clearRecoveredList();
   startLoadingAnimation();
   isDeathLoading = true;
-  const { data: deathResponse } = await fetchCountryInfo(selectedId, 'deaths');
+  const { data: deathResponse } = await fetchCountryInfo(selectedId, CovidStatus.Deaths);
   const { data: recoveredResponse } = await fetchCountryInfo(
     selectedId,
-    'recovered',
+    CovidStatus.Recovered,
   );
   const { data: confirmedResponse } = await fetchCountryInfo(
     selectedId,
-    'confirmed',
+    CovidStatus.Confirmed,
   );
   endLoadingAnimation();
   setDeathsList(deathResponse);
@@ -128,7 +128,7 @@ function clearDeathList() {
 }
 
 function setTotalDeathsByCountry(data: any) {
-  deathsTotal.innerText = data[0].Cases;
+  deathsTotal.innerText = data[0].Cases;      // #13 as HTMLParagraphElement
 }
 
 function setRecoveredList(data:any) {
