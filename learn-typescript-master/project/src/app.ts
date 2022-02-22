@@ -6,7 +6,7 @@ function $(selector: string) {
 function getUnixTimestamp(date: Date) {
   return new Date(date).getTime();
 }
-
+const a = 10;
 // DOM
 let a: Element | HTMLElement | HTMLParagraphElement;
 const confirmedTotal = $('.confirmed-total') as HTMLSpanElement;
