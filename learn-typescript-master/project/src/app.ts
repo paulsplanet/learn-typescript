@@ -1,6 +1,6 @@
 // import library
 import axios from 'axios';
-import Chart from 'chart.js';
+import { Chart } from 'chart.js';
 
 // utils
 // function for DOM by selecting CSS class
