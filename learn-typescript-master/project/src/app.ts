@@ -1,3 +1,7 @@
+// import library
+import axios from 'axios';
+import Chart from 'chart.js';
+
 // utils
 // function for DOM by selecting CSS class
 function $(selector: string) {
@@ -6,9 +10,9 @@ function $(selector: string) {
 function getUnixTimestamp(date: Date) {
   return new Date(date).getTime();
 }
-const a = 10;
+
 // DOM
-let a: Element | HTMLElement | HTMLParagraphElement;
+// let a: Element | HTMLElement | HTMLParagraphElement;
 const confirmedTotal = $('.confirmed-total') as HTMLSpanElement;
 const deathsTotal = $('.deaths') as HTMLParagraphElement;
 const recoveredTotal = $('.recovered') as HTMLParagraphElement;
