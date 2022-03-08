@@ -1,7 +1,7 @@
 // import library
 import axios, { AxiosResponse } from 'axios';
 import { Chart } from 'chart.js';
-import { CovidSummaryResponse } from './Covid/index';
+import { CountrySummaryResponse, CovidSummaryResponse } from './Covid/index';
 
 // utils
 // function for DOM by selecting CSS class
@@ -55,7 +55,10 @@ enum CovidStatus {
   Deaths = 'deaths',
 }
 
-function fetchCountryInfo(countryCode: string, status: CovidStatus) {
+function fetchCountryInfo(
+  countryCode: string,
+  status: CovidStatus
+): Promise<CountrySummaryResponse> {
   // status params: confirmed, recovered, deaths
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
   return axios.get(url);
