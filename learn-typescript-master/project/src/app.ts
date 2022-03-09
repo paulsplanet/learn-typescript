@@ -1,7 +1,11 @@
 // import library
 import axios, { AxiosResponse } from 'axios';
 import { Chart } from 'chart.js';
-import { CountrySummaryResponse, CovidSummaryResponse } from './Covid/index';
+import {
+  Country,
+  CountrySummaryResponse,
+  CovidSummaryResponse,
+} from './Covid/index';
 
 // utils
 // function for DOM by selecting CSS class
@@ -214,11 +218,11 @@ function setChartData(data) {
   renderChart(chartData, chartLabel);
 }
 
-function setTotalConfirmedNumber(data) {
+function setTotalConfirmedNumber(data: CovidSummaryResponse) {
   confirmedTotal.innerText = data.Countries.reduce(
-    (total, current) => (total += current.TotalConfirmed),
+    (total: number, current: Country) => (total += current.TotalConfirmed),
     0
-  );
+  ).toString();
 }
 
 function setTotalDeathsByWorld(data) {
