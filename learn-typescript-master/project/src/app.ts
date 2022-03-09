@@ -210,11 +210,13 @@ function renderChart(data: any, labels: any) {
   });
 }
 
-function setChartData(data) {
-  const chartData = data.slice(-14).map(value => value.Cases);
+function setChartData(data: any) {
+  const chartData = data.slice(-14).map((value: any) => value.Cases);
   const chartLabel = data
     .slice(-14)
-    .map(value => new Date(value.Date).toLocaleDateString().slice(5, -1));
+    .map((value: any) =>
+      new Date(value.Date).toLocaleDateString().slice(5, -1)
+    );
   renderChart(chartData, chartLabel);
 }
 
@@ -225,30 +227,30 @@ function setTotalConfirmedNumber(data: CovidSummaryResponse) {
   ).toString();
 }
 
-function setTotalDeathsByWorld(data) {
+function setTotalDeathsByWorld(data: CovidSummaryResponse) {
   deathsTotal.innerText = data.Countries.reduce(
-    (total, current) => (total += current.TotalDeaths),
+    (total: number, current: Country) => (total += current.TotalDeaths),
     0
-  );
+  ).toString();
 }
 
-function setTotalRecoveredByWorld(data) {
+function setTotalRecoveredByWorld(data: CovidSummaryResponse) {
   recoveredTotal.innerText = data.Countries.reduce(
-    (total, current) => (total += current.TotalRecovered),
+    (total: number, current: Country) => (total += current.TotalRecovered),
     0
-  );
+  ).toString();
 }
 
-function setCountryRanksByConfirmedCases(data) {
+function setCountryRanksByConfirmedCases(data: CovidSummaryResponse) {
   const sorted = data.Countries.sort(
-    (a, b) => b.TotalConfirmed - a.TotalConfirmed
+    (a: Country, b: Country) => b.TotalConfirmed - a.TotalConfirmed
   );
-  sorted.forEach(value => {
+  sorted.forEach((value: Country) => {
     const li = document.createElement('li');
     li.setAttribute('class', 'list-item flex align-center');
     li.setAttribute('id', value.Slug);
     const span = document.createElement('span');
-    span.textContent = value.TotalConfirmed;
+    span.textContent = value.TotalConfirmed.toString();
     span.setAttribute('class', 'cases');
     const p = document.createElement('p');
     p.setAttribute('class', 'country');
@@ -259,7 +261,7 @@ function setCountryRanksByConfirmedCases(data) {
   });
 }
 
-function setLastUpdatedTimestamp(data) {
+function setLastUpdatedTimestamp(data: CovidSummaryResponse) {
   lastUpdatedTime.innerText = new Date(data.Date).toLocaleString();
 }
 
